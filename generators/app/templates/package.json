@@ -1,0 +1,24 @@
+{
+  "name": "<%=appnameSlug%>",
+  "author": {
+    "name": "<%=authorName%>",
+    "email": "<%=authorEmail%>"
+  },
+  "private": true,
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "eslint": "^4.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.10.0",
+    "stylelint": "^8.4.0",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0",
+    "typescript": "^2.6.2"
+},
+  "scripts": {
+    "lint": "npm run lint:eslint",
+    "lint:eslint": "eslint './**/*.js' --ignore-pattern node_modules",
+    "lint:tslint": "tslint --project tsconfig.json './**/*.ts' --exclude '**/node_modules/**/*'",
+    "lint:style": "stylelint '**/*.less' --ignore-pattern node_modules"
+  }
+}

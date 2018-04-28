@@ -1,0 +1,46 @@
+{
+  "name": "generator-carcass-base",
+  "version": "1.0.0-beta.1",
+  "description": "Yeoman generator for miscellaneous project files",
+  "homepage": "https://github.com/carcass-yo/generator-carcass-base",
+  "author": {
+    "name": "Constantine Karnaukhov",
+    "email": "genteelknight@gmail.com",
+    "url": "https://github.com/hustlahusky"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/app/index.js",
+  "keywords": [
+    "yeoman-generator",
+    "readme",
+    "config",
+    "ignore",
+    "lint"
+  ],
+  "dependencies": {
+    "async": "^2.6.0",
+    "chalk": "^2.1.0",
+    "lodash": "^4.17.4",
+    "shelljs": "^0.8.1",
+    "yeoman-generator": "^2.0.1",
+    "yosay": "^2.0.1"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.0",
+    "eslint": "^4.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.10.0",
+    "nsp": "^2.6.3",
+    "yeoman-assert": "^3.1.0",
+    "yeoman-test": "^1.7.0"
+  },
+  "scripts": {
+    "test": "exit 1",
+    "reload": "rm -rf manual_test* && mkdir -p manual_test",
+    "manual_test": "npm run reload && cd manual_test && node --inspect $(where yo) carcass-base"
+  },
+  "repository": "carcass-yo/generator-carcass-base",
+  "license": "MIT"
+}
