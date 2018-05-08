@@ -1,10 +1,7 @@
-const YoGenerator = require('yeoman-generator');
-const shell = require('shelljs');
-// const _ = require('lodash');
-// const chalk = require('chalk');
+const CarcassGenerator = require('carcass-generator');
 const path = require('path');
 
-class CarcassBaseGenerator extends YoGenerator {
+class CarcassGeneratorBase extends CarcassGenerator {
   /**
    * Keystone.js generator
    * @param {String|Array} args
@@ -12,67 +9,147 @@ class CarcassBaseGenerator extends YoGenerator {
    */
   constructor(args, opts) {
     super(args, opts);
-    this.options.appnameSlug = this.appname.replace(/\s+/g, '-');
-    this.options.dirname = path.basename(this.destinationPath());
-    this.options.gitOrigin = CarcassBaseGenerator.getGitOrigin('#ENTER_YOUR_GIT_REPO_HERE#');
-    this.option('authorName', {
-      type: String,
-      description: 'Enter your name',
-      default: this.user.git.name(),
-    });
-    this.option('authorEmail', {
-      type: String,
-      description: 'Enter your email',
-      default: this.user.git.email(),
-    });
-  }
 
-  /**
-   * Get git repository origin url
-   * @param {string} [defaultValue] set default returned value
-   * @return {string}
-   */
-  static getGitOrigin(defaultValue = '') {
-    if (!shell.which('git')) return defaultValue;
-    const res = shell
-      .exec('git remote get-url origin', { silent: true })
-      .stdout
-      .trim();
-    return res.includes('Not a git repository') ? defaultValue : res;
+    this.questionsList = [
+      {
+        name: 'appname',
+        when: () => !this.options.appname,
+        type: 'input',
+        message: 'Enter your app name',
+        default: this.appname,
+      },
+      {
+        name: 'authorName',
+        when: () => !this.options.authorName,
+        type: 'input',
+        message: 'Enter your name',
+        default: this.user.git.name(),
+      },
+      {
+        name: 'authorEmail',
+        when: () => !this.options.authorEmail,
+        type: 'input',
+        message: 'Enter your email',
+        default: this.user.git.email(),
+      },
+      {
+        name: 'docker',
+        when: () => !this.options.docker,
+        type: 'confirm',
+        message: 'I will use Docker in my project',
+      },
+      {
+        name: 'eslint',
+        when: () => !this.options.eslint,
+        type: 'confirm',
+        message: 'I will use ESLint in my project',
+      },
+      {
+        name: 'tslint',
+        when: () => !this.options.eslint,
+        type: 'confirm',
+        message: 'I will use TSLint in my project',
+      },
+      {
+        name: 'stylelint',
+        when: () => !this.options.stylelint,
+        type: 'confirm',
+        message: 'I will use StyleLint in my project',
+      },
+      {
+        name: 'gitlabci',
+        when: () => !this.options.gitlabci,
+        type: 'confirm',
+        message: 'I will use Gitlab CI in my project',
+      },
+      {
+        name: 'dotenv',
+        when: () => !this.options.dotenv,
+        type: 'confirm',
+        message: 'Create .env file',
+      },
+    ];
+
+    this.options.dirname = path.basename(this.destinationPath());
+    this.options.gitOrigin = CarcassGeneratorBase.getGitOrigin('#ENTER_YOUR_GIT_REPO_HERE#');
+    this.convertPromptsToOptions(this.questionsList);
   }
 
   async prompting() {
-    // Convert options configs to prompts
-    // eslint-disable-next-line no-underscore-dangle
-    const options = this._options;
-    const prompts = [];
-    Object.keys(options)
-      .filter(o => !['help', 'skip-cache', 'skip-install'].includes(o))
-      .forEach((o) => {
-        prompts.push({
-          type: 'input',
-          name: o,
-          message: options[o].description,
-          default: options[o].default,
-        });
-      });
-
-    const answers = await this.prompt(prompts);
+    const answers = await this.prompt(this.questionsList);
     Object.assign(this.options, answers);
-    console.log(this.options);
+    this.options.appnameSlug = this.options.appname.replace(/\s+/g, '-');
   }
 
   writing() {
-    // this.fs.copyTpl(
-    //   this.templatePath('.'),
-    //   this.destinationPath('.'),
-    //   this.options,
-    //   {},
-    //   {
-    //     globOptions: { dot: true },
-    //   },
-    // );
+    if (this.options.docker) {
+      this.fs.copyTpl(
+        this.templatePath('.dockerignore'),
+        this.destinationPath('.dockerignore'),
+      );
+    }
+
+    if (this.options.eslint) {
+      this.fs.copyTpl(
+        this.templatePath('.eslintrc'),
+        this.destinationPath('.eslintrc'),
+      );
+    }
+
+    if (this.options.tslint) {
+      this.fs.copyTpl(
+        this.templatePath('tslint.json'),
+        this.destinationPath('tslint.json'),
+      );
+    }
+
+    if (this.options.stylelint) {
+      this.fs.copyTpl(
+        this.templatePath('.stylelintrc'),
+        this.destinationPath('.stylelintrc'),
+      );
+    }
+
+    if (this.options.gitlabci) {
+      this.fs.copyTpl(
+        this.templatePath('.gitlab-ci.yml'),
+        this.destinationPath('.gitlab-ci.yml'),
+      );
+      this.fs.copyTpl(
+        this.templatePath('Makefile'),
+        this.destinationPath('Makefile'),
+      );
+    }
+
+    if (this.options.dotenv) {
+      this.fs.copyTpl(
+        this.templatePath('_env'),
+        this.destinationPath('.env'),
+      );
+    }
+
+    this.fs.copyTpl(
+      this.templatePath('.editorconfig'),
+      this.destinationPath('.editorconfig'),
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('.gitignore'),
+      this.destinationPath('.gitignore'),
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      this.options,
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('readme.md'),
+      this.destinationPath('readme.md'),
+      this.options,
+    );
   }
 }
 
-module.exports = CarcassBaseGenerator;
+module.exports = CarcassGeneratorBase;

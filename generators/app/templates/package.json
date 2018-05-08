@@ -6,19 +6,21 @@
   },
   "private": true,
   "license": "UNLICENSED",
-  "devDependencies": {
+  "devDependencies": {<% if (eslint) { %>
     "eslint": "^4.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.10.0",
-    "stylelint": "^8.4.0",
+    "eslint-plugin-import": "^2.10.0"<% } %><% if (stylelint) { %>,
+    "stylelint": "^8.4.0"<% } %><% if (tslint) { %>,
     "tslint": "^5.9.1",
     "tslint-config-airbnb": "^5.8.0",
-    "typescript": "^2.6.2"
-},
+    "typescript": "^2.6.2"<% } %>
+  },
   "scripts": {
-    "lint": "npm run lint:eslint",
-    "lint:eslint": "eslint './**/*.js' --ignore-pattern node_modules",
-    "lint:tslint": "tslint --project tsconfig.json './**/*.ts' --exclude '**/node_modules/**/*'",
-    "lint:style": "stylelint '**/*.less' --ignore-pattern node_modules"
+    "start": "echo \"Error: no start script specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npm run lint:eslint"<% if (eslint) { %>,
+    "lint:eslint": "eslint './**/*.js' --ignore-pattern node_modules"<% } %><% if (stylelint) { %>,
+    "lint:style": "stylelint '**/*.less' --ignore-pattern node_modules"<% } %><% if (tslint) { %>,
+    "lint:tslint": "tslint --project tsconfig.json './**/*.ts' --exclude '**/node_modules/**/*'"<% } %>
   }
 }
