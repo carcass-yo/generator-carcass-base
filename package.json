@@ -31,15 +31,23 @@
     "eslint": "^4.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",
+    "jest": "^22.4.3",
+    "jest-environment-node": "^22.4.3",
     "nsp": "^2.6.3",
     "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.7.0"
   },
   "scripts": {
-    "test": "exit 1",
+    "test": "jest --forceExit --runInBand ./tests/*",
     "reload": "rm -rf manual_test* && mkdir -p manual_test",
     "manual_test": "npm run reload && cd manual_test && node --inspect $(where yo) carcass-base"
   },
   "repository": "carcass-yo/generator-carcass-base",
-  "license": "MIT"
+  "license": "MIT",
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/generators/app/templates"
+    ],
+    "testEnvironment": "node"
+  }
 }
