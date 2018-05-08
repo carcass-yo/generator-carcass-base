@@ -1,9 +1,8 @@
-# generator-carcass [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> ЗК.Каркас - Yeoman генератор структуры нового проекта
+# generator-carcass-base [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-carcass using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and generator-carcass-base using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
@@ -13,7 +12,7 @@ npm install -g generator-carcass
 Then generate your new project:
 
 ```bash
-yo carcass
+yo carcass-base
 ```
 
 ## Getting To Know Yeoman
@@ -28,11 +27,11 @@ yo carcass
 MIT © [Constantine Karnaukhov](https://github.com/hustlahusky)
 
 
-[npm-image]: https://badge.fury.io/js/generator-carcass.svg
-[npm-url]: https://npmjs.org/package/generator-carcass
-[travis-image]: https://travis-ci.org/goldencodeio/carcass.svg?branch=master
-[travis-url]: https://travis-ci.org/goldencodeio/carcass
-[daviddm-image]: https://david-dm.org/goldencodeio/carcass.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/goldencodeio/carcass
-[coveralls-image]: https://coveralls.io/repos/goldencodeio/carcass/badge.svg
-[coveralls-url]: https://coveralls.io/r/goldencodeio/carcass
+[npm-image]: https://badge.fury.io/js/generator-carcass-base.svg
+[npm-url]: https://npmjs.org/package/generator-carcass-base
+[travis-image]: https://travis-ci.org/carcass-yo/generator-carcass-base.svg?branch=master
+[travis-url]: https://travis-ci.org/carcass-yo/generator-carcass-base
+[daviddm-image]: https://david-dm.org/carcass-yo/generator-carcass-base.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/carcass-yo/generator-carcass-base
+[coveralls-image]: https://coveralls.io/repos/carcass-yo/generator-carcass-base/badge.svg
+[coveralls-url]: https://coveralls.io/r/carcass-yo/generator-carcass-base
