@@ -10,61 +10,64 @@ class CarcassGeneratorBase extends CarcassGenerator {
   constructor(args, opts) {
     super(args, opts);
 
+    const checkOption = name =>
+      Object.prototype.hasOwnProperty.call(this.options, name) && this.options[name];
+
     this.questionsList = [
       {
         name: 'appname',
-        when: () => !this.options.appname,
+        when: () => !checkOption('appname'),
         type: 'input',
         message: 'Enter your app name',
         default: this.appname,
       },
       {
         name: 'authorName',
-        when: () => !this.options.authorName,
+        when: () => !checkOption('authorName'),
         type: 'input',
         message: 'Enter your name',
         default: this.user.git.name(),
       },
       {
         name: 'authorEmail',
-        when: () => !this.options.authorEmail,
+        when: () => !checkOption('authorEmail'),
         type: 'input',
         message: 'Enter your email',
         default: this.user.git.email(),
       },
       {
         name: 'docker',
-        when: () => !this.options.docker,
+        when: () => !checkOption('docker'),
         type: 'confirm',
         message: 'I will use Docker in my project',
       },
       {
         name: 'eslint',
-        when: () => !this.options.eslint,
+        when: () => !checkOption('eslint'),
         type: 'confirm',
         message: 'I will use ESLint in my project',
       },
       {
         name: 'tslint',
-        when: () => !this.options.eslint,
+        when: () => !checkOption('eslint'),
         type: 'confirm',
         message: 'I will use TSLint in my project',
       },
       {
         name: 'stylelint',
-        when: () => !this.options.stylelint,
+        when: () => !checkOption('stylelint'),
         type: 'confirm',
         message: 'I will use StyleLint in my project',
       },
       {
         name: 'gitlabci',
-        when: () => !this.options.gitlabci,
+        when: () => !checkOption('gitlabci'),
         type: 'confirm',
         message: 'I will use Gitlab CI in my project',
       },
       {
         name: 'dotenv',
-        when: () => !this.options.dotenv,
+        when: () => !checkOption('dotenv'),
         type: 'confirm',
         message: 'Create .env file',
       },
