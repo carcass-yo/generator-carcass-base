@@ -7,12 +7,12 @@ describe('stylelint', () => {
   const testFn = () => assert.file(['.stylelintrc']);
 
   describe('with options', () => {
-    beforeAll(() => generator().withOptions({ stylelint: true }).toPromise());
+    beforeAll(() => generator().withOptions({ stylelint: true }).toPromise(), 15000);
     it('creates stylelint config', testFn);
   });
 
   describe('with prompts', () => {
-    beforeAll(() => generator().withPrompts({ stylelint: true }).toPromise());
+    beforeAll(() => generator().withPrompts({ stylelint: true }).toPromise(), 15000);
     it('creates stylelint config', testFn);
   });
 });

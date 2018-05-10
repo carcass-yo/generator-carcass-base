@@ -7,12 +7,12 @@ describe('eslint', () => {
   const testFn = () => assert.file(['.eslintrc']);
 
   describe('with options', () => {
-    beforeAll(() => generator().withOptions({ eslint: true }).toPromise());
+    beforeAll(() => generator().withOptions({ eslint: true }).toPromise(), 15000);
     it('creates eslint config', testFn);
   });
 
   describe('with prompts', () => {
-    beforeAll(() => generator().withPrompts({ eslint: true }).toPromise());
+    beforeAll(() => generator().withPrompts({ eslint: true }).toPromise(), 15000);
     it('creates eslint config', testFn);
   });
 });

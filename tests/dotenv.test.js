@@ -7,12 +7,12 @@ describe('.env', () => {
   const testFn = () => assert.file(['.env']);
 
   describe('with options', () => {
-    beforeAll(() => generator().withOptions({ tslint: true }).toPromise());
+    beforeAll(() => generator().withOptions({ tslint: true }).toPromise(), 15000);
     it('creates .env file', testFn);
   });
 
   describe('with prompts', () => {
-    beforeAll(() => generator().withPrompts({ tslint: true }).toPromise());
+    beforeAll(() => generator().withPrompts({ tslint: true }).toPromise(), 15000);
     it('creates .env file', testFn);
   });
 });

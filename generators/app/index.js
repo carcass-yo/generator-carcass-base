@@ -11,7 +11,7 @@ class CarcassGeneratorBase extends CarcassGenerator {
     super(args, opts);
 
     const checkOption = name =>
-      Object.prototype.hasOwnProperty.call(this.options, name) && this.options[name];
+      this.options[name] !== undefined && this.options[name] !== null;
 
     this.questionsList = [
       {

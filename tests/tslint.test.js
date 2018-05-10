@@ -7,12 +7,12 @@ describe('tslint', () => {
   const testFn = () => assert.file(['tslint.json']);
 
   describe('with options', () => {
-    beforeAll(() => generator().withOptions({ tslint: true }).toPromise());
+    beforeAll(() => generator().withOptions({ tslint: true }).toPromise(), 15000);
     it('creates tslint config', testFn);
   });
 
   describe('with prompts', () => {
-    beforeAll(() => generator().withPrompts({ tslint: true }).toPromise());
+    beforeAll(() => generator().withPrompts({ tslint: true }).toPromise(), 15000);
     it('creates tslint config', testFn);
   });
 });

@@ -7,12 +7,12 @@ describe('gitlabci', () => {
   const testFn = () => assert.file(['.gitlab-ci.yml', 'Makefile']);
 
   describe('with options', () => {
-    beforeAll(() => generator().withOptions({ gitlabci: true }).toPromise());
+    beforeAll(() => generator().withOptions({ gitlabci: true }).toPromise(), 15000);
     it('creates CI config and Makefile', testFn);
   });
 
   describe('with prompts', () => {
-    beforeAll(() => generator().withPrompts({ gitlabci: true }).toPromise());
+    beforeAll(() => generator().withPrompts({ gitlabci: true }).toPromise(), 15000);
     it('creates CI config and Makefile', testFn);
   });
 });
