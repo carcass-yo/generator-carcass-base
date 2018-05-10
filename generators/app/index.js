@@ -1,9 +1,9 @@
-const CarcassGenerator = require('carcass-generator');
+const Carcass = require('carcass-generator');
 const path = require('path');
 
-class CarcassGeneratorBase extends CarcassGenerator {
+class CarcassGeneratorBase extends Carcass {
   /**
-   * Keystone.js generator
+   * Base generator
    * @param {String|Array} args
    * @param {Object} opts
    */
@@ -11,7 +11,7 @@ class CarcassGeneratorBase extends CarcassGenerator {
     super(args, opts);
 
     const checkOption = name =>
-      this.options[name] !== undefined && this.options[name] !== null;
+      !Carcass.isUndefined(this.options[name]) && !Carcass.isNull(this.options[name]);
 
     this.questionsList = [
       {
@@ -74,14 +74,14 @@ class CarcassGeneratorBase extends CarcassGenerator {
     ];
 
     this.options.dirname = path.basename(this.destinationPath());
-    this.options.gitOrigin = CarcassGeneratorBase.getGitOrigin('#ENTER_YOUR_GIT_REPO_HERE#');
+    this.options.gitOrigin = Carcass.getGitOrigin('#ENTER_YOUR_GIT_REPO_HERE#');
     this.convertPromptsToOptions(this.questionsList);
   }
 
   async prompting() {
     const answers = await this.prompt(this.questionsList);
     Object.assign(this.options, answers);
-    this.options.appnameSlug = this.options.appname.replace(/\s+/g, '-');
+    this.options.appnameSlug = Carcass.slugify(this.options.appname);
   }
 
   writing() {
