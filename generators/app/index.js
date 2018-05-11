@@ -49,7 +49,7 @@ class CarcassGeneratorBase extends Carcass {
       },
       {
         name: 'tslint',
-        when: () => !checkOption('eslint'),
+        when: () => !checkOption('tslint'),
         type: 'confirm',
         message: 'I will use TSLint in my project',
       },
@@ -84,7 +84,7 @@ class CarcassGeneratorBase extends Carcass {
     this.options.appnameSlug = Carcass.slugify(this.options.appname);
   }
 
-  writing() {
+  configuring() {
     if (this.options.docker) {
       this.fs.copyTpl(
         this.templatePath('.dockerignore'),
