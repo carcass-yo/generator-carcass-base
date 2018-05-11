@@ -6,7 +6,7 @@ First, install [Yeoman](http://yeoman.io) and generator-carcass-base using [npm]
 
 ```bash
 npm install -g yo
-npm install -g generator-carcass
+npm install -g generator-carcass-base
 ```
 
 Then generate your new project:
